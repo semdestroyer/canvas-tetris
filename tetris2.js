@@ -2,18 +2,18 @@ var speed = 5;
 var accelerate = 1;
 var delay;
 var x = 4;
-var y = -1;
+var y = 0;
 var timer;
 var bsize = 30;
 var height;
 var width;
 var score = 0;
 
-
+                                                                 //even numbers are falling figures not even are static figures
 var canvas;
 
 var field =
-[[0,0,0,0,0,0,0,0,0],
+[
 [0,0,0,0,0,0,0,0,0],
 [0,0,0,0,0,0,0,0,0],
 [0,0,0,0,0,0,0,0,0],
@@ -30,34 +30,26 @@ var field =
 [0,0,0,0,0,0,0,0,0],
 [0,0,0,0,0,0,0,0,0],
 [0,0,0,0,0,0,0,0,0],
-[0,0,0,0,0,0,0,0,0]
+[0,0,0,0,0,0,0,0,0],
+[0,0,0,0,0,0,0,0,0],
+[3,3,3,3,3,3,3,3,3],
 ];
-
 
 
 
 function start()
 {
 
-	for(var j = 0; j<12; j++)
-   
-   {
-   		for(var i = 0; i<9; i++)	 
-   	 	{
-   			
-			field[i][j] = 0;
-		}
-   }
    	
    	delay = speed;
   	timer = 1;
 
-	field[x][y] = 2;
+	field[y][x] = 2;
 
 	canvas = document.getElementById("2d");
 	width = canvas.scrollWidth;
 	height = canvas.scrollHeight;
-	setInterval(update, 100);
+	setInterval(update, 10);
 	canvas.requestAnimationFrame(update);
 
 	
@@ -70,28 +62,28 @@ function keyd(e)
 		case 39:
 		//add check for wall
 
-			if(x > 7 || field[x+1][y] == 1)
+			if(x > 7 || field[y][x+1] == 1)
 			{
 			
 			}
 			else
 			{
-				field[x][y] = 0;
+				field[y][x] = 0;
 				x++;
-				field[x][y] = 2;
+				field[y][x] = 2;
 			}
 			break;
 		case 37:
 			
-			if(x < 1 || field[x-1][y] == 1)
+			if(x < 1 || field[y][x-1] == 1)
 			{
 			
 			}
 			else
 			{
-				field[x][y] = 0;
+				field[y][x] = 0;
 				x--;
-				field[x][y] = 2;
+				field[y][x] = 2;
 			}
 			
 			break;
@@ -117,6 +109,26 @@ function keyu(e)
 
 }
 
+function movedown()
+{
+	for(var j = 17; j>0; j--)
+   	{
+   		for(var i = 0; i<9; i++)	 
+   	 	{
+   	 		 var prev;
+   	 		 //if(field[j][i] != 2 && field[j-1][i] != 2)
+   	 		 //{	
+   	 		 		prev  = field[j][i];
+   	 		 		field[j][i] = field[j-1][i];
+   	 		 		field[j-1][i] = prev;
+   	 		 //}	
+   	 	}
+   	}
+ 
+
+
+
+}
 
 
 function update()
@@ -130,25 +142,25 @@ ctx.clearRect(0,0,width,height); // clear canvas
 	if(timer <= 0 )
 	{
 
-		if(field[x][y+1] == null)
+		if(field[y+1][x] == 3)
 		{
-		field[x][y] = 1;
+		field[y][x] = 1;
 		x = 4;
 		y = 0;
-		field[x][y] = 2;
+		field[y][x] = 2;
 		}
 
-		if(field[x][y+1] == 1)
+		if(field[y+1][x] == 1)
 		{
-		field[x][y] = 1;
+		field[y][x] = 1;
 		x = 4;
 		y = 0;
-		field[x][y] = 2;
+		field[y][x] = 2;
 		}
 		else
 		{
-		field[x][y] = 0;
-		field[x][y + 1] = 2;
+		field[y][x] = 0;
+		field[y+1][x] = 2;
 		y++;
 		}
 		timer = delay;
@@ -161,11 +173,10 @@ ctx.clearRect(0,0,width,height); // clear canvas
 var c = 0;
 
 	for(var j = 0; j<18; j++)
-   
    {
    		for(var i = 0; i<9; i++)	 
    	 	{
-   			if(field[i][j] == 1)
+   			if(field[j][i] == 1)
    			{	
    				
 				c++;
@@ -174,8 +185,11 @@ var c = 0;
 					score++;
 					for(var k = 0; k<9; k++)
 					{
-						field[k][j] = 0;
-					}	 
+						field[j][k] = 0;
+						
+
+					}
+					movedown();	 
    	 			
 						
 				}
@@ -184,22 +198,25 @@ var c = 0;
 		}
 		c = 0;
    }
-	for(var j = 0; j<18; j++)
+
+	for(var j = 0; j<19; j++)
    
    {
    		for(var i = 0; i<9; i++)	 
    	 	{
-   			if(field[i][j] == 1 || field[i][j] == 2)
+   			if(field[j][i] == 1 || field[j][i] == 2)
    			{	
    				
 				ctx.fillRect(i*bsize,j*bsize,bsize,bsize);
 			}
-			//ctx.fillText(field[i][j], 20*i, 50*j);
+			//ctx.fillText(field[j][i], 20*i, 50*j);
+		
 		}
    }
    ctx.fillText("Score: " + score, 200, 500);
 
 	canvas.requestAnimationFrame(update);	
 }
+
 addEventListener("keydown", keyd, false);
 addEventListener("keyup", keyu, false);
