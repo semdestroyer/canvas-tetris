@@ -456,7 +456,7 @@ function touchButtd(evt)
 			&& tch.pageY > 600 
 			&& tch.pageY < 650)
 		{
-			window.navigator.vibrate(500);
+			window.navigator.vibrate(100);
 			keyd( new KeyboardEvent('keydown', {'keyCode':37, 'which':37}));
 		}
 
@@ -465,7 +465,7 @@ function touchButtd(evt)
 			&& tch.pageY > 600 
 			&& tch.pageY < 650)
 		{
-			window.navigator.vibrate(500);
+			window.navigator.vibrate(100);
 			keyd( new KeyboardEvent('keydown', {'keyCode':39, 'which':39}));
 		}
 		if(tch.pageX > 350 
@@ -473,7 +473,7 @@ function touchButtd(evt)
 			&& tch.pageY > 600 
 			&& tch.pageY < 650)
 		{
-			window.navigator.vibrate(500);
+			window.navigator.vibrate(100);
 			keyd( new KeyboardEvent('keydown', {'keyCode':38, 'which':40}));
 		} 
 
@@ -482,7 +482,7 @@ function touchButtd(evt)
 			&& tch.pageY > 600 
 			&& tch.pageY < 650)
 		{
-			window.navigator.vibrate(500);
+			window.navigator.vibrate(100);
 			keyd( new KeyboardEvent('keydown', {'keyCode':40, 'which':40}));
 		} 
 
