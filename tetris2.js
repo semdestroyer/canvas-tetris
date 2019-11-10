@@ -396,7 +396,8 @@ function Next()
 function start()
 {
 
-   	
+   	addEventListener("touchstart", touchButtd, false);
+   	addEventListener("touchend", touchButtu, false);
    	delay = speed;
   	timer = 1;
 
@@ -443,10 +444,64 @@ function randomFigure()
 	var rand =	Math.random() * 6;
 	return rand.toFixed();
 }
+function touchButtd(evt)
+{
+	
+// console.log("touchstart.");
+
+ 	var tch = evt.targetTouches[0];
+
+		if(tch.pageX > 0 
+			&& tch.pageX < 50 
+			&& tch.pageY > 600 
+			&& tch.pageY < 650)
+		{
+			keyd( new KeyboardEvent('keydown', {'keyCode':37, 'which':37}));
+		}
+
+		if(tch.pageX > 100 
+			&& tch.pageX < 150 
+			&& tch.pageY > 600 
+			&& tch.pageY < 650)
+		{
+			keyd( new KeyboardEvent('keydown', {'keyCode':39, 'which':39}));
+		}
+		if(tch.pageX > 350 
+			&& tch.pageX < 400 
+			&& tch.pageY > 600 
+			&& tch.pageY < 650)
+		{
+			keyd( new KeyboardEvent('keydown', {'keyCode':38, 'which':40}));
+		} 
+
+		if(tch.pageX > 200 
+			&& tch.pageX < 300 
+			&& tch.pageY > 600 
+			&& tch.pageY < 650)
+		{
+			keyd( new KeyboardEvent('keydown', {'keyCode':40, 'which':40}));
+		} 
+
+		  
+}
+function touchButtu(evt)
+{
+		
+		   var tch = evt.changedTouches[0];
+			if(tch.pageX > 200 
+			&& tch.pageX < 300 
+			&& tch.pageY > 600 
+			&& tch.pageY < 650)
+			{
+			keyu( new KeyboardEvent('keyup', {'keyCode':40, 'which':40}));
+			} 
+
+}
 
 
 function keyd(e)
 {
+	
 	switch (e.keyCode)
 	 {
 		case 39:
@@ -456,9 +511,9 @@ function keyd(e)
 
 				case 2:
 				if((rot == 0 && (x > 6  || field[y+2][x+2]%2 == 1 || field[y][x+1]%2 == 1 || field[y+1][x+1]%2 == 1))
-				|| (rot == 1 && (x > 6  || field[y+2][x+2]%2 == 1 || field[y][x+1]%2 == 1 || field[y+1][x+1]%2 == 1))
-				|| (rot == 2 && (x > 6  || field[y+2][x+2]%2 == 1 || field[y][x+1]%2 == 1 || field[y+1][x+1]%2 == 1))
-				|| (rot == 3 && (x > 6  || field[y+2][x+2]%2 == 1 || field[y][x+1]%2 == 1 || field[y+1][x+1]%2 == 1))) 
+				|| (rot == 1 && (x > 5  || field[y-1][x+3]%2 == 1 || field[y][x+3]%2 == 1))
+				|| (rot == 2 && (x > 5  || field[y+1][x+3]%2 == 1 || field[y][x+3]%2 == 1))
+				|| (rot == 3 && (x > 7  || field[y][x+1]%2 == 1 || field[y+1][x+1]%2 == 1 || field[y+2][x]%2 == 1))) 
 				{
 					
 				}
@@ -486,7 +541,7 @@ function keyd(e)
 
 				case 6:
 				if((rot == 0 && (x > 7 || field[y][x+1]%2 == 1 || field[y+1][x+1]%2 == 1 || field[y+2][x+1]%2 == 1 || field[y+3][x+1]%2 == 1)) 
-					|| (rot == 1 && (x > 7 || field[y][x+1]%2 == 1 || field[y+1][x+1]%2 == 1 || field[y+2][x+1]%2 == 1 || field[y+3][x+1]%2 == 1))) 
+					|| (rot == 1 && (x > 4 || field[y][x+4]%2 == 1))) 
 				{
 					
 				}
@@ -497,11 +552,11 @@ function keyd(e)
 					shape_I('fall',rot);
 				}
 				break;
-
+					//сделать блокировку поворта
 
 				case 8:
 				if((rot == 0 && (x > 5 || field[y][x+1]%2 == 1 || field[y+1][x+3]%2 == 1)) 
-					|| (rot == 0 && (x > 5 || field[y][x+1]%2 == 1 || field[y+1][x+3]%2 == 1)))
+					|| (rot == 1 && (x > 5 || field[y][x+1]%2 == 1 || field[y+1][x+3]%2 == 1))) 
 				{
 					
 				}
@@ -516,7 +571,7 @@ function keyd(e)
 
 				case 10:
 				if((rot == 0 && (x > 7 || field[y][x+1]%2 == 1 || field[y+1][x]%2 == 1))
-				|| (rot == 0 && (x > 7 || field[y][x+1]%2 == 1 || field[y+1][x]%2 == 1))) 
+				|| (rot == 1 && (x > 7 || field[y][x+1]%2 == 1 || field[y+1][x]%2 == 1))) 
 				{
 					
 				}
@@ -793,49 +848,6 @@ function keyu(e)
 	}
 
 }
-/*
-function movedown()									/// сделать сдвиг относительно заполнения а не последней строки
-{
-	for(var j = 17; j>0; j--)
-   	{
-   		for(var i = 0; i<9; i++)	 
-   	 	{
-   	 		 var prev;	
-   	 		 prev  = field[j][i];
-   	 		 field[j][i] = field[j-1][i];
-   	 		 field[j-1][i] = prev;	 	
-   	 	}
-   	}
- 
-}
-*/
-/*
-function movedown()									/// сделать сдвиг относительно заполнения а не последней строки
-{
-	for(var j = 17; j>0; j--)
-   	{
-   		for(var i = 0; i<9; i++)	 
-   	 	{
-   	 		 var prev;	
-   	 		 prev  = field[j][i];
-   	 		 if(field[j+1][i] == 3)
-   	 		 {
-
-
-   	 		 }
-   	 		 else
-   	 		 {
-
-   	 		 	field[j+1][i] = prev;
-
-   	 		 }
-   	 		 //field[j][i] = field[j-1][i];
-   	 		 //field[j-1][i] = prev;	 	
-   	 	}
-   	}
- 
-}
-*/
 function movedown(str)									/// сделать сдвиг относительно заполнения а не последней строки
 {
 
@@ -1093,14 +1105,7 @@ var c = 0;
    {
    		for(var i = 0; i<9; i++)	 
    	 	{
-   	 		/*
-   			if(field[j][i] == 0)
-   			{	
-   				ctx.fillStyle = "rgb(0,0,0)";				
-				ctx.fillRect(i*bsize,j*bsize,bsize,bsize);
-			}
-			*/
-
+   	 		
    			if(field[j][i] == 1 || field[j][i] == 2)
    			{	
    				ctx.fillStyle = "rgb(200,0,0)";				
@@ -1210,3 +1215,4 @@ var c = 0;
 }
 addEventListener("keydown", keyd, false);
 addEventListener("keyup", keyu, false);
+
