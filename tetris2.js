@@ -456,6 +456,7 @@ function touchButtd(evt)
 			&& tch.pageY > 600 
 			&& tch.pageY < 650)
 		{
+			window.navigator.vibrate(500);
 			keyd( new KeyboardEvent('keydown', {'keyCode':37, 'which':37}));
 		}
 
@@ -464,6 +465,7 @@ function touchButtd(evt)
 			&& tch.pageY > 600 
 			&& tch.pageY < 650)
 		{
+			window.navigator.vibrate(500);
 			keyd( new KeyboardEvent('keydown', {'keyCode':39, 'which':39}));
 		}
 		if(tch.pageX > 350 
@@ -471,6 +473,7 @@ function touchButtd(evt)
 			&& tch.pageY > 600 
 			&& tch.pageY < 650)
 		{
+			window.navigator.vibrate(500);
 			keyd( new KeyboardEvent('keydown', {'keyCode':38, 'which':40}));
 		} 
 
@@ -479,6 +482,7 @@ function touchButtd(evt)
 			&& tch.pageY > 600 
 			&& tch.pageY < 650)
 		{
+			window.navigator.vibrate(500);
 			keyd( new KeyboardEvent('keydown', {'keyCode':40, 'which':40}));
 		} 
 
@@ -960,7 +964,7 @@ if(timer <= 0 )
 		case 8:
 
 		if (((rot == 0) && (field[y+1][x] % 2 == 1 || field[y+2][x+1] % 2 == 1 ||  field[y+2][x+2] % 2 == 1 )) 
-			|| ((rot == 1) && (field[y][x] % 2 == 1 || field[y+2][x+1] % 2 == 1 )))
+		|| ((rot == 1) && (field[y+1][x] % 2 == 1 || field[y+2][x+1] % 2 == 1 )))
 		{
 		shape_Z('block',rot);
 		Next();
@@ -979,7 +983,7 @@ if(timer <= 0 )
 		case 10:
 
 		if(((rot == 0) && (field[y+2][x-2] % 2 == 1 || field[y+2][x-1] % 2 == 1 || field[y+1][x] % 2 == 1))
-		|| ((rot == 1) && (field[y+2][x] % 2 == 1 || field[y+3][x+1] % 2 == 1)))
+		|| ((rot == 1) && (field[y+2][x] % 2 == 1 || field[y+3][x-1] % 2 == 1)))
 
 		{
 		shape_S('block',rot);
@@ -1208,7 +1212,7 @@ var c = 0;
 
    }
    ctx.fillStyle = "rgb(0,0,0)";	
-   ctx.fillText("Score: " + score, 200, 700);
+   ctx.fillText("Score: " + score, 200, 570);
       ctx.fillText("Level: " + level, 500, 300);
    canvas.requestAnimationFrame(update);
    }	
