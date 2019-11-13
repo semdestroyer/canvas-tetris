@@ -560,7 +560,7 @@ function keyd(e)
 
 				case 8:
 				if((rot == 0 && (x > 5 || field[y][x+1]%2 == 1 || field[y+1][x+3]%2 == 1)) 
-					|| (rot == 1 && (x > 5 || field[y][x+1]%2 == 1 || field[y+1][x+3]%2 == 1))) 
+					|| (rot == 1 && (x > 6 || field[y][x+2]%2 == 1 || field[y+1][x+2]%2 == 1))) 
 				{
 					
 				}
@@ -575,7 +575,7 @@ function keyd(e)
 
 				case 10:
 				if((rot == 0 && (x > 7 || field[y][x+1]%2 == 1 || field[y+1][x]%2 == 1))
-				|| (rot == 1 && (x > 7 || field[y][x+1]%2 == 1 || field[y+1][x]%2 == 1))) 
+				|| (rot == 1 && (x > 6 || field[y][x+1]%2 == 1 || field[y+1][x]%2 == 1))) 
 				{
 					
 				}
@@ -589,9 +589,9 @@ function keyd(e)
 
 				case 12:
 				if ((rot == 0 && (x > 7 || field[y][x+1]%2 == 1 || field[y+1][x+1]%2 == 1 || field[y+2][x+1]%2 == 1))
-					||(rot == 0 && (x > 7 || field[y][x+1]%2 == 1 || field[y+1][x+1]%2 == 1 || field[y+2][x+1]%2 == 1))
-					||(rot == 0 && (x > 7 || field[y][x+1]%2 == 1 || field[y+1][x+1]%2 == 1 || field[y+2][x+1]%2 == 1))
-					||(rot == 0 && (x > 7 || field[y][x+1]%2 == 1 || field[y+1][x+1]%2 == 1 || field[y+2][x+1]%2 == 1))) 
+					||(rot == 1 && (x > 5 || field[y][x+3]%2 == 1 || field[y-1][x+3]%2 == 1))
+					||(rot == 2 && (x > 5 || field[y][x+3]%2 == 1 || field[y+1][x+3]%2 == 1))
+					||(rot == 3 && (x > 7 || field[y][x+1]%2 == 1 || field[y+1][x+1]%2 == 1 || field[y+2][x+1]%2 == 1))) 
 				{
 					
 				}
@@ -604,10 +604,10 @@ function keyd(e)
 				break;
 
 				case 14:
-				if((rot == 0 &&(x > 5 || field[y][x+3]%2 == 1 || field[y+1][x+2]%2 == 1))
-				|| (rot == 0 &&(x > 5 || field[y][x+3]%2 == 1 || field[y+1][x+2]%2 == 1))
-				|| (rot == 0 &&(x > 5 || field[y][x+3]%2 == 1 || field[y+1][x+2]%2 == 1))
-				|| (rot == 0 &&(x > 5 || field[y][x+3]%2 == 1 || field[y+1][x+2]%2 == 1)))	
+				if((rot == 0 && (x > 5 || field[y][x+3]%2 == 1 || field[y+1][x+2]%2 == 1))
+				|| (rot == 1 && (x > 5 || field[y][x+2]%2 == 1 || field[y+1][x+1]%2 == 1 || field[y+2][x+1]%2 == 1))
+				|| (rot == 2 && (x > 5 || field[y][x+3]%2 == 1 || field[y-1][x+2]%2 == 1))
+				|| (rot == 3 && (x > 5 || field[y][x+1]%2 == 1 || field[y+1][x+1]%2 == 1 || field[y+2][x+1]%2 == 1)))
 				{
 					
 				}
@@ -628,9 +628,9 @@ function keyd(e)
 
 				case 2:
 				if((rot == 0 && (x < 1 || field[y][x-1]%2 == 1 || field[y+1][x-1]%2 == 1 || field[y+2][x-1]%2 == 1)) 
-				||(rot == 0 && (x < 1 || field[y][x-1]%2 == 1 || field[y+1][x-1]%2 == 1 || field[y+2][x-1]%2 == 1))
-				||(rot == 0 && (x < 1 || field[y][x-1]%2 == 1 || field[y+1][x-1]%2 == 1 || field[y+2][x-1]%2 == 1))
-				||(rot == 0 && (x < 1 || field[y][x-1]%2 == 1 || field[y+1][x-1]%2 == 1 || field[y+2][x-1]%2 == 1)))
+				||(rot == 1 && (x < 1 || field[y][x-1]%2 == 1 || field[y-1][x-1]%2 == 1))
+				||(rot == 2 && (x < 1 || field[y][x-1]%2 == 1 || field[y+1][x+1]%2 == 1))
+				||(rot == 3 && (x < 2 || field[y][x-2]%2 == 1 || field[y+1][x-1]%2 == 1 || field[y+2][x-1]%2 == 1)))
 				{
 			
 				}
@@ -657,7 +657,7 @@ function keyd(e)
 
 				case 6:
 				if((rot == 0 && (x < 1 || field[y][x-1]%2 == 1 || field[y+1][x-1]%2 == 1 || field[y+2][x-1]%2 == 1 || field[y+3][x-1]%2 == 1))
-				|| (rot == 0 && (x < 1 || field[y][x-1]%2 == 1 || field[y+1][x-1]%2 == 1 || field[y+2][x-1]%2 == 1 || field[y+3][x-1]%2 == 1)))
+				|| (rot == 1 && (x < 1 || field[y][x-1]%2 == 1 || field[y+1][x-1]%2 == 1)))
 				{
 			
 				}
@@ -670,8 +670,8 @@ function keyd(e)
 				break;
 
 				case 8:
-				if((rot == 0 && (x < 1 || field[y][x+1]%2 == 1 || field[y+1][x]%2 == 1))
-				|| (rot == 0 && (x < 1 || field[y][x+1]%2 == 1 || field[y+1][x]%2 == 1))) 	
+				if((rot == 0 && (x < 1 || field[y][x-1]%2 == 1 || field[y+1][x]%2 == 1))
+				|| (rot == 1 && (x < 1 || field[y][x-1]%2 == 1 || field[y+1][x-1]%2 == 1 || field[y-1][x-1]%2 == 1))) 	
 				{
 			
 				}
@@ -686,7 +686,7 @@ function keyd(e)
 
 				case 10:
 				if((rot == 0 && (x < 3 || field[y][x-1]%2 == 1 || field[y+1][x-3]%2 == 1))
-				|| (rot == 0 && (x < 3 || field[y][x-1]%2 == 1 || field[y+1][x-3]%2 == 1)))
+				|| (rot == 1 && (x < 3 || field[y][x-1]%2 == 1 || field[y+1][x-2]%2 == 1 || field[y+2][x-3]%2 == 1)))
 				{
 			
 				}
@@ -701,9 +701,9 @@ function keyd(e)
 
 				case 12:
 				if((rot == 0 && (x < 2 || field[y][x-1]%2 == 1 || field[y+1][x-1]%2 == 1 || field[y+2][x-2]%2 == 1))
-				|| (rot == 0 && (x < 2 || field[y][x-1]%2 == 1 || field[y+1][x-1]%2 == 1 || field[y+2][x-2]%2 == 1))
-				|| (rot == 0 && (x < 2 || field[y][x-1]%2 == 1 || field[y+1][x-1]%2 == 1 || field[y+2][x-2]%2 == 1))
-				|| (rot == 0 && (x < 2 || field[y][x-1]%2 == 1 || field[y+1][x-1]%2 == 1 || field[y+2][x-2]%2 == 1)))	
+				|| (rot == 1 && (x < 2 || field[y][x-1]%2 == 1 || field[y-1][x-1]%2 == 1))
+				|| (rot == 2 && (x < 2 || field[y][x-1]%2 == 1 || field[y+1][x+1]%2 == 1))
+				|| (rot == 3 && (x < 2 || field[y][x-1]%2 == 1 || field[y][x-1]%2 == 1 || field[y][x-2]%2 == 1)))	
 				{
 			
 				}
@@ -718,9 +718,9 @@ function keyd(e)
 
 				case 14:
 				if((rot == 0 && (x < 1 || field[y][x-2]%2 == 1 || field[y+1][x-1]%2 == 1))
-				||(rot == 0 && (x < 1 || field[y][x-2]%2 == 1 || field[y+1][x-1]%2 == 1))
-				||(rot == 0 && (x < 1 || field[y][x-2]%2 == 1 || field[y+1][x-1]%2 == 1))
-				||(rot == 0 && (x < 1 || field[y][x-2]%2 == 1 || field[y+1][x-1]%2 == 1)))	
+				||(rot == 1 && (x < 1 || field[y][x-1]%2 == 1 || field[y+1][x-1]%2 == 1 || field[y+2][x-1]%2 == 1))
+				||(rot == 2 && (x < 1 || field[y][x-2]%2 == 1 || field[y-1][x-1]%2 == 1))
+				||(rot == 3 && (x < 1 || field[y][x-1]%2 == 1 || field[y+1][x-2]%2 == 1 || field[y+2][x-1]%2 == 1)))	
 				{
 			
 				}
