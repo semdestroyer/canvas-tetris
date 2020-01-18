@@ -740,18 +740,20 @@ function keyd(e)
 			{
 
 				case 2:
-				
-				shape_L('air',rot);
-				if(rot == 3)
+				if(y > 1 && x > 1)
 				{
+					shape_L('air',rot);
+					if(rot == 3)
+					{
 					rot = 0;
 					shape_L('fall',rot);
-				}
-				else
-				{
+					}
+					else
+					{
 					rot++;
 					shape_L('fall',rot);	
 
+					}
 				}
 				break;
 
@@ -760,20 +762,25 @@ function keyd(e)
 				break;
 
 				case 6:
-				shape_I('air',rot);
-				if(rot == 1)
+				if(y > 1 && x > 1)
 				{
+					shape_I('air',rot);
+					if(rot == 1)
+					{
 					rot = 0;
 					shape_I('fall',rot);
-				}
-				else
-				{
+					}
+					else
+					{
 					rot++;
 					shape_I('fall',rot);	
+					}
 				}
 				break;
 
 				case 8:
+				if(y > 1 && x > 1)
+				{
 				shape_Z('air',rot);
 				if(rot == 1)
 				{
@@ -785,9 +792,12 @@ function keyd(e)
 					rot ++;
 					shape_Z('fall',rot);	
 				}
+				}
 				break;
 
 				case 10:
+				if(y > 1 && x > 1)
+				{
 				shape_S('air',rot);
 				if(rot == 1)
 				{
@@ -799,9 +809,12 @@ function keyd(e)
 					rot ++;
 					shape_S('fall',rot);	
 				}
+				}
 				break;
 
 				case 12:
+				if(y > 1 && x > 1)
+				{
 				shape_J('air',rot);
 				if(rot == 3)
 				{
@@ -813,9 +826,12 @@ function keyd(e)
 					rot ++;
 					shape_J('fall',rot);	
 				}
+				}
 				break;
 
 				case 14:
+				if(y > 1 && x > 1)
+				{
 				shape_T('air',rot);
 				if(rot == 3)
 				{
@@ -827,8 +843,11 @@ function keyd(e)
 					rot ++;
 					shape_T('fall',rot);	
 				}
+				}
 				break;
-			}
+				}
+				//break;
+			//}
 			
 		break;
 
@@ -1149,71 +1168,73 @@ var c = 0;
 			}
 		//	ctx.fillText(field[j][i], 20*i, 50*j);
 		}
+		//move left
+		var panx = 400;
 		ctx.font="20px Georgia";
 		ctx.fillStyle = "rgb(0,0,0)";
-		ctx.fillText('Next:',500,80);
+		ctx.fillText('Next:',panx,80);
 		if(next == 2)
 		{
 			ctx.fillStyle = "rgb(200,0,0)";
-			ctx.fillRect(500,100,bsize,bsize);
-			ctx.fillRect(500,100+bsize,bsize,bsize);
-			ctx.fillRect(500,100+bsize+bsize,bsize,bsize);
-			ctx.fillRect(500+bsize,100+bsize+bsize,bsize,bsize);
+			ctx.fillRect(panx,100,bsize,bsize);
+			ctx.fillRect(panx,100+bsize,bsize,bsize);
+			ctx.fillRect(panx,100+bsize+bsize,bsize,bsize);
+			ctx.fillRect(panx+bsize,100+bsize+bsize,bsize,bsize);
 		}
 		if(next == 4)
 		{
 			ctx.fillStyle = "rgb(0,200,0)";
-			ctx.fillRect(500,100,bsize,bsize);
-			ctx.fillRect(500,100+bsize,bsize,bsize);
-			ctx.fillRect(500+bsize,100,bsize,bsize);
-			ctx.fillRect(500+bsize,100+bsize,bsize,bsize);
+			ctx.fillRect(panx,100,bsize,bsize);
+			ctx.fillRect(panx,100+bsize,bsize,bsize);
+			ctx.fillRect(panx+bsize,100,bsize,bsize);
+			ctx.fillRect(panx+bsize,100+bsize,bsize,bsize);
 		}
 		if(next == 6)
 		{
 			ctx.fillStyle = "rgb(0,0,200)";
-			ctx.fillRect(500,100,bsize,bsize);
-			ctx.fillRect(500,100+bsize,bsize,bsize);
-			ctx.fillRect(500,100+bsize*2,bsize,bsize);
-			ctx.fillRect(500,100+bsize*3,bsize,bsize);
+			ctx.fillRect(panx,100,bsize,bsize);
+			ctx.fillRect(panx,100+bsize,bsize,bsize);
+			ctx.fillRect(panx,100+bsize*2,bsize,bsize);
+			ctx.fillRect(panx,100+bsize*3,bsize,bsize);
 		}
 		if(next == 8)
 		{
 			ctx.fillStyle = "rgb(32, 178, 170)";
-			ctx.fillRect(500,100,bsize,bsize);
-			ctx.fillRect(500+bsize,100,bsize,bsize);
-			ctx.fillRect(500+bsize,100+bsize,bsize,bsize);
-			ctx.fillRect(500+bsize*2,100+bsize,bsize,bsize);
+			ctx.fillRect(panx,100,bsize,bsize);
+			ctx.fillRect(panx+bsize,100,bsize,bsize);
+			ctx.fillRect(panx+bsize,100+bsize,bsize,bsize);
+			ctx.fillRect(panx+bsize*2,100+bsize,bsize,bsize);
 		}
 		if(next == 10)
 		{
 			ctx.fillStyle = "rgb(178, 32, 170)";
-			ctx.fillRect(500,100,bsize,bsize);
-			ctx.fillRect(500+bsize,100,bsize,bsize);
-			ctx.fillRect(500+bsize,100+bsize,bsize,bsize);
-			ctx.fillRect(500+bsize*2,100+bsize,bsize,bsize);
+			ctx.fillRect(panx,100,bsize,bsize);
+			ctx.fillRect(panx+bsize,100,bsize,bsize);
+			ctx.fillRect(panx+bsize,100+bsize,bsize,bsize);
+			ctx.fillRect(panx+bsize*2,100+bsize,bsize,bsize);
 		}
 		if(next == 12)
 		{
 			ctx.fillStyle = "rgb(178, 170, 32)";	
-			ctx.fillRect(500,100,bsize,bsize);
-			ctx.fillRect(500,100+bsize,bsize,bsize);
-			ctx.fillRect(500,100+bsize+bsize,bsize,bsize);
-			ctx.fillRect(500-bsize,100+bsize+bsize,bsize,bsize);
+			ctx.fillRect(panx,100,bsize,bsize);
+			ctx.fillRect(panx,100+bsize,bsize,bsize);
+			ctx.fillRect(panx,100+bsize+bsize,bsize,bsize);
+			ctx.fillRect(panx-bsize,100+bsize+bsize,bsize,bsize);
 		}
 
 		if(next == 14)
 		{
 			ctx.fillStyle = "rgb(32, 32, 0)";
-			ctx.fillRect(500+bsize,100,bsize,bsize);
-			ctx.fillRect(500+bsize*2,100,bsize,bsize);
-			ctx.fillRect(500+bsize*3,100,bsize,bsize);
-			ctx.fillRect(500+bsize*2,100+bsize,bsize,bsize);
+			ctx.fillRect(panx+bsize,100,bsize,bsize);
+			ctx.fillRect(panx+bsize*2,100,bsize,bsize);
+			ctx.fillRect(panx+bsize*3,100,bsize,bsize);
+			ctx.fillRect(panx+bsize*2,100+bsize,bsize,bsize);
 		}
 
    }
    ctx.fillStyle = "rgb(0,0,0)";	
-   ctx.fillText("Score: " + score, 200, 570);
-      ctx.fillText("Level: " + level, 500, 300);
+   ctx.fillText("Score: " + score, width-300, height-100);
+      ctx.fillText("Level: " + level, width-100, height-200);
    canvas.requestAnimationFrame(update);
    }	
 }
