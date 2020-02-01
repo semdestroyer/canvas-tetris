@@ -9,7 +9,7 @@ var delay;
 var x = 4;
 var y = 0;
 var timer;
-var bsize = 30;
+var bsize = 10;
 var height;
 var width;
 var score = 0;
@@ -431,8 +431,18 @@ function start()
 	
 	}
 	canvas = document.getElementById("2d");
+	 canvas.width  = window.innerWidth - 20;
+    canvas.height = window.innerHeight - 20;
+
+//    canvas.width = document.documentElement.clientWidth - 10;
+  //  canvas.height = document.documentElement.clientHeight; 
 	width = canvas.scrollWidth;
 	height = canvas.scrollHeight;
+
+
+
+
+
 	setInterval(update, 10);
 	canvas.requestAnimationFrame(update);
 
@@ -1169,72 +1179,78 @@ var c = 0;
 		//	ctx.fillText(field[j][i], 20*i, 50*j);
 		}
 		//move left
-		var panx = 400;
-		ctx.font="20px Georgia";
+		var panx = bsize*10;
+		var pany = bsize*3;
+		
+		
+
+		ctx.font=bsize + "px Georgia";
 		ctx.fillStyle = "rgb(0,0,0)";
-		ctx.fillText('Next:',panx,80);
+		ctx.fillText('Next:',panx,pany-pany/2);
 		if(next == 2)
 		{
 			ctx.fillStyle = "rgb(200,0,0)";
-			ctx.fillRect(panx,100,bsize,bsize);
-			ctx.fillRect(panx,100+bsize,bsize,bsize);
-			ctx.fillRect(panx,100+bsize+bsize,bsize,bsize);
-			ctx.fillRect(panx+bsize,100+bsize+bsize,bsize,bsize);
+			ctx.fillRect(panx,pany,bsize,bsize);
+			ctx.fillRect(panx,pany+bsize,bsize,bsize);
+			ctx.fillRect(panx,pany+bsize+bsize,bsize,bsize);
+			ctx.fillRect(panx+bsize,pany+bsize+bsize,bsize,bsize);
 		}
 		if(next == 4)
 		{
 			ctx.fillStyle = "rgb(0,200,0)";
-			ctx.fillRect(panx,100,bsize,bsize);
-			ctx.fillRect(panx,100+bsize,bsize,bsize);
-			ctx.fillRect(panx+bsize,100,bsize,bsize);
-			ctx.fillRect(panx+bsize,100+bsize,bsize,bsize);
+			ctx.fillRect(panx,pany,bsize,bsize);
+			ctx.fillRect(panx,pany+bsize,bsize,bsize);
+			ctx.fillRect(panx+bsize,pany,bsize,bsize);
+			ctx.fillRect(panx+bsize,pany+bsize,bsize,bsize);
 		}
 		if(next == 6)
 		{
 			ctx.fillStyle = "rgb(0,0,200)";
-			ctx.fillRect(panx,100,bsize,bsize);
-			ctx.fillRect(panx,100+bsize,bsize,bsize);
-			ctx.fillRect(panx,100+bsize*2,bsize,bsize);
-			ctx.fillRect(panx,100+bsize*3,bsize,bsize);
+			ctx.fillRect(panx,pany,bsize,bsize);
+			ctx.fillRect(panx,pany+bsize,bsize,bsize);
+			ctx.fillRect(panx,pany+bsize*2,bsize,bsize);
+			ctx.fillRect(panx,pany+bsize*3,bsize,bsize);
 		}
 		if(next == 8)
 		{
 			ctx.fillStyle = "rgb(32, 178, 170)";
-			ctx.fillRect(panx,100,bsize,bsize);
-			ctx.fillRect(panx+bsize,100,bsize,bsize);
-			ctx.fillRect(panx+bsize,100+bsize,bsize,bsize);
-			ctx.fillRect(panx+bsize*2,100+bsize,bsize,bsize);
+			ctx.fillRect(panx,pany,bsize,bsize);
+			ctx.fillRect(panx+bsize,pany,bsize,bsize);
+			ctx.fillRect(panx+bsize,pany+bsize,bsize,bsize);
+			ctx.fillRect(panx+bsize*2,pany+bsize,bsize,bsize);
 		}
 		if(next == 10)
 		{
 			ctx.fillStyle = "rgb(178, 32, 170)";
-			ctx.fillRect(panx,100,bsize,bsize);
-			ctx.fillRect(panx+bsize,100,bsize,bsize);
-			ctx.fillRect(panx+bsize,100+bsize,bsize,bsize);
-			ctx.fillRect(panx+bsize*2,100+bsize,bsize,bsize);
+			ctx.fillRect(panx,pany,bsize,bsize);
+			ctx.fillRect(panx+bsize,pany,bsize,bsize);
+			ctx.fillRect(panx+bsize,pany+bsize,bsize,bsize);
+			ctx.fillRect(panx+bsize*2,pany+bsize,bsize,bsize);
 		}
 		if(next == 12)
 		{
 			ctx.fillStyle = "rgb(178, 170, 32)";	
-			ctx.fillRect(panx,100,bsize,bsize);
-			ctx.fillRect(panx,100+bsize,bsize,bsize);
-			ctx.fillRect(panx,100+bsize+bsize,bsize,bsize);
-			ctx.fillRect(panx-bsize,100+bsize+bsize,bsize,bsize);
+			ctx.fillRect(panx,pany,bsize,bsize);
+			ctx.fillRect(panx,pany+bsize,bsize,bsize);
+			ctx.fillRect(panx,pany+bsize+bsize,bsize,bsize);
+			ctx.fillRect(panx-bsize,pany+bsize+bsize,bsize,bsize);
 		}
 
 		if(next == 14)
 		{
 			ctx.fillStyle = "rgb(32, 32, 0)";
-			ctx.fillRect(panx+bsize,100,bsize,bsize);
-			ctx.fillRect(panx+bsize*2,100,bsize,bsize);
-			ctx.fillRect(panx+bsize*3,100,bsize,bsize);
-			ctx.fillRect(panx+bsize*2,100+bsize,bsize,bsize);
+			ctx.fillRect(panx+bsize,pany,bsize,bsize);
+			ctx.fillRect(panx+bsize*2,pany,bsize,bsize);
+			ctx.fillRect(panx+bsize*3,pany,bsize,bsize);
+			ctx.fillRect(panx+bsize*2,pany+bsize,bsize,bsize);
 		}
 
    }
    ctx.fillStyle = "rgb(0,0,0)";	
-   ctx.fillText("Score: " + score, width-300, height-100);
-      ctx.fillText("Level: " + level, width-100, height-200);
+   ctx.fillText("Score: " + score, bsize*10, bsize*8);
+      ctx.fillText("Level: " + level, bsize*10, bsize*10);
+  
+  	bsize = window.innerHeight/25;
    canvas.requestAnimationFrame(update);
    }	
 }
