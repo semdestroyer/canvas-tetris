@@ -9,7 +9,7 @@ var delay;
 var x = 4;
 var y = 0;
 var timer;
-var bsize = 30;
+var bsize = 10;
 var height;
 var width;
 var score = 0;
@@ -39,6 +39,24 @@ var field =
 [0,0,0,0,0,0,0,0,0],
 [3,3,3,3,3,3,3,3,3],
 ];
+
+
+
+var IMG_restart;
+var IMG_left;
+var IMG_up;
+var IMG_accelerate;
+var IMG_right;
+var IMG_rotate;
+
+
+
+
+
+var restx = bsize*8;
+var resty = bsize*16;
+var rests = bsize*4;
+
 
 
 
@@ -396,6 +414,25 @@ function Next()
 function start()
 {
 
+	IMG_rotate = new Image();
+	IMG_right = new Image();
+	IMG_accelerate = new Image();
+	IMG_left = new Image();
+	IMG_restart = new Image();
+
+
+	IMG_rotate.src = "img/rotate.svg";
+	IMG_right.src =  "img/right.svg";
+	IMG_accelerate.src = "img/accelerate.svg"; 
+	IMG_left.src = "img/left.svg" ;
+	IMG_restart.src = "img/restart.svg";
+
+		
+
+
+
+
+
    	addEventListener("touchstart", touchButtd, false);
    	addEventListener("touchend", touchButtu, false);
    	delay = speed;
@@ -431,8 +468,18 @@ function start()
 	
 	}
 	canvas = document.getElementById("2d");
+	 canvas.width  = window.innerWidth - 20;
+    canvas.height = window.innerHeight - 20;
+
+//    canvas.width = document.documentElement.clientWidth - 10;
+  //  canvas.height = document.documentElement.clientHeight; 
 	width = canvas.scrollWidth;
 	height = canvas.scrollHeight;
+
+
+
+
+
 	setInterval(update, 10);
 	canvas.requestAnimationFrame(update);
 
@@ -484,7 +531,20 @@ function touchButtd(evt)
 		{
 			window.navigator.vibrate(100);
 			keyd( new KeyboardEvent('keydown', {'keyCode':40, 'which':40}));
-		} 
+		}
+        if(over == true)
+            {
+                if(tch.pageX >  restx
+			     && tch.pageX < restx + rests 
+                && tch.pageY > resty 
+                && tch.pageY < resty+rests)
+		      {
+			     window.navigator.vibrate(100);
+			     keyd( new KeyboardEvent('keydown', {'keyCode':40, 'which':40}));
+		      }
+            }
+        
+        
 
 		  
 }
@@ -740,18 +800,20 @@ function keyd(e)
 			{
 
 				case 2:
-				
-				shape_L('air',rot);
-				if(rot == 3)
+				if(y > 1 && x > 1)
 				{
+					shape_L('air',rot);
+					if(rot == 3)
+					{
 					rot = 0;
 					shape_L('fall',rot);
-				}
-				else
-				{
+					}
+					else
+					{
 					rot++;
 					shape_L('fall',rot);	
 
+					}
 				}
 				break;
 
@@ -760,20 +822,25 @@ function keyd(e)
 				break;
 
 				case 6:
-				shape_I('air',rot);
-				if(rot == 1)
+				if(y > 1 && x > 1)
 				{
+					shape_I('air',rot);
+					if(rot == 1)
+					{
 					rot = 0;
 					shape_I('fall',rot);
-				}
-				else
-				{
+					}
+					else
+					{
 					rot++;
 					shape_I('fall',rot);	
+					}
 				}
 				break;
 
 				case 8:
+				if(y > 1 && x > 1)
+				{
 				shape_Z('air',rot);
 				if(rot == 1)
 				{
@@ -785,9 +852,12 @@ function keyd(e)
 					rot ++;
 					shape_Z('fall',rot);	
 				}
+				}
 				break;
 
 				case 10:
+				if(y > 1 && x > 1)
+				{
 				shape_S('air',rot);
 				if(rot == 1)
 				{
@@ -799,9 +869,12 @@ function keyd(e)
 					rot ++;
 					shape_S('fall',rot);	
 				}
+				}
 				break;
 
 				case 12:
+				if(y > 1 && x > 1)
+				{
 				shape_J('air',rot);
 				if(rot == 3)
 				{
@@ -813,9 +886,12 @@ function keyd(e)
 					rot ++;
 					shape_J('fall',rot);	
 				}
+				}
 				break;
 
 				case 14:
+				if(y > 1 && x > 1)
+				{
 				shape_T('air',rot);
 				if(rot == 3)
 				{
@@ -827,8 +903,11 @@ function keyd(e)
 					rot ++;
 					shape_T('fall',rot);	
 				}
+				}
 				break;
-			}
+				}
+				//break;
+			//}
 			
 		break;
 
@@ -890,9 +969,13 @@ fi = field[y][x];
 
 if(over == true)
 {
-	 ctx.fillText("Score: " + score, 200, 300);
-	  ctx.fillText("Level: " + level, 200, 400);
-	   ctx.fillText("Game Over", 200, 500);
+    
+	 	ctx.fillText("Score: " + score, bsize*8, bsize*10);
+	  	ctx.fillText("Level: " + level, bsize*8, bsize*12);
+	    ctx.fillText("Game Over", bsize*8, bsize*14);
+        ctx.drawImage(IMG_restart, bsize*8 , bsize*16 , bsize*4, bsize*4);
+	    bsize = window.innerHeight/25;
+	    ctx.font=bsize + "px Georgia";
 
 }
 else
@@ -1082,6 +1165,7 @@ var c = 0;
    }
    if(/Android|AppleWebKit|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent))
    {
+   		/*
    		ctx.fillStyle = "rgb(161, 108, 59)";				
 		ctx.fillRect(0,600,50,50);
 		ctx.fillStyle = "rgb(0, 0, 0)";	
@@ -1101,6 +1185,16 @@ var c = 0;
 		ctx.fillRect(350,600,65,50);
 		ctx.fillStyle = "rgb(0, 0, 0)";	
 		ctx.fillText('rotate',350,630);
+		*/
+		
+		ctx.drawImage(IMG_accelerate, bsize,  bsize*19,  bsize, bsize);
+		ctx.drawImage(IMG_left, bsize*2.5 , bsize*19 , bsize, bsize);
+		ctx.drawImage(IMG_right, bsize*3.5 , bsize*19 , bsize, bsize);
+		ctx.drawImage(IMG_rotate, bsize*4.5 , bsize*19 , bsize, bsize);	
+
+
+
+
 
    }
 
@@ -1149,74 +1243,90 @@ var c = 0;
 			}
 		//	ctx.fillText(field[j][i], 20*i, 50*j);
 		}
-		ctx.font="20px Georgia";
+		//move left
+		var panx = bsize*10;
+		var pany = bsize*3;
+		
+		
+
+		ctx.font=bsize + "px Georgia";
 		ctx.fillStyle = "rgb(0,0,0)";
-		ctx.fillText('Next:',500,80);
+		ctx.fillText('Next:',panx,pany-pany/2);
 		if(next == 2)
 		{
 			ctx.fillStyle = "rgb(200,0,0)";
-			ctx.fillRect(500,100,bsize,bsize);
-			ctx.fillRect(500,100+bsize,bsize,bsize);
-			ctx.fillRect(500,100+bsize+bsize,bsize,bsize);
-			ctx.fillRect(500+bsize,100+bsize+bsize,bsize,bsize);
+			ctx.fillRect(panx,pany,bsize,bsize);
+			ctx.fillRect(panx,pany+bsize,bsize,bsize);
+			ctx.fillRect(panx,pany+bsize+bsize,bsize,bsize);
+			ctx.fillRect(panx+bsize,pany+bsize+bsize,bsize,bsize);
 		}
 		if(next == 4)
 		{
 			ctx.fillStyle = "rgb(0,200,0)";
-			ctx.fillRect(500,100,bsize,bsize);
-			ctx.fillRect(500,100+bsize,bsize,bsize);
-			ctx.fillRect(500+bsize,100,bsize,bsize);
-			ctx.fillRect(500+bsize,100+bsize,bsize,bsize);
+			ctx.fillRect(panx,pany,bsize,bsize);
+			ctx.fillRect(panx,pany+bsize,bsize,bsize);
+			ctx.fillRect(panx+bsize,pany,bsize,bsize);
+			ctx.fillRect(panx+bsize,pany+bsize,bsize,bsize);
 		}
 		if(next == 6)
 		{
 			ctx.fillStyle = "rgb(0,0,200)";
-			ctx.fillRect(500,100,bsize,bsize);
-			ctx.fillRect(500,100+bsize,bsize,bsize);
-			ctx.fillRect(500,100+bsize*2,bsize,bsize);
-			ctx.fillRect(500,100+bsize*3,bsize,bsize);
+			ctx.fillRect(panx,pany,bsize,bsize);
+			ctx.fillRect(panx,pany+bsize,bsize,bsize);
+			ctx.fillRect(panx,pany+bsize*2,bsize,bsize);
+			ctx.fillRect(panx,pany+bsize*3,bsize,bsize);
 		}
 		if(next == 8)
 		{
 			ctx.fillStyle = "rgb(32, 178, 170)";
-			ctx.fillRect(500,100,bsize,bsize);
-			ctx.fillRect(500+bsize,100,bsize,bsize);
-			ctx.fillRect(500+bsize,100+bsize,bsize,bsize);
-			ctx.fillRect(500+bsize*2,100+bsize,bsize,bsize);
+			ctx.fillRect(panx,pany,bsize,bsize);
+			ctx.fillRect(panx+bsize,pany,bsize,bsize);
+			ctx.fillRect(panx+bsize,pany+bsize,bsize,bsize);
+			ctx.fillRect(panx+bsize*2,pany+bsize,bsize,bsize);
 		}
 		if(next == 10)
 		{
 			ctx.fillStyle = "rgb(178, 32, 170)";
-			ctx.fillRect(500,100,bsize,bsize);
-			ctx.fillRect(500+bsize,100,bsize,bsize);
-			ctx.fillRect(500+bsize,100+bsize,bsize,bsize);
-			ctx.fillRect(500+bsize*2,100+bsize,bsize,bsize);
+			ctx.fillRect(panx,pany,bsize,bsize);
+			ctx.fillRect(panx+bsize,pany,bsize,bsize);
+			ctx.fillRect(panx+bsize,pany+bsize,bsize,bsize);
+			ctx.fillRect(panx+bsize*2,pany+bsize,bsize,bsize);
 		}
 		if(next == 12)
 		{
 			ctx.fillStyle = "rgb(178, 170, 32)";	
-			ctx.fillRect(500,100,bsize,bsize);
-			ctx.fillRect(500,100+bsize,bsize,bsize);
-			ctx.fillRect(500,100+bsize+bsize,bsize,bsize);
-			ctx.fillRect(500-bsize,100+bsize+bsize,bsize,bsize);
+			ctx.fillRect(panx,pany,bsize,bsize);
+			ctx.fillRect(panx,pany+bsize,bsize,bsize);
+			ctx.fillRect(panx,pany+bsize+bsize,bsize,bsize);
+			ctx.fillRect(panx-bsize,pany+bsize+bsize,bsize,bsize);
 		}
 
 		if(next == 14)
 		{
 			ctx.fillStyle = "rgb(32, 32, 0)";
-			ctx.fillRect(500+bsize,100,bsize,bsize);
-			ctx.fillRect(500+bsize*2,100,bsize,bsize);
-			ctx.fillRect(500+bsize*3,100,bsize,bsize);
-			ctx.fillRect(500+bsize*2,100+bsize,bsize,bsize);
+			ctx.fillRect(panx+bsize,pany,bsize,bsize);
+			ctx.fillRect(panx+bsize*2,pany,bsize,bsize);
+			ctx.fillRect(panx+bsize*3,pany,bsize,bsize);
+			ctx.fillRect(panx+bsize*2,pany+bsize,bsize,bsize);
 		}
 
    }
    ctx.fillStyle = "rgb(0,0,0)";	
-   ctx.fillText("Score: " + score, 200, 570);
-      ctx.fillText("Level: " + level, 500, 300);
+   ctx.fillText("Score: " + score, bsize*10, bsize*8);
+      ctx.fillText("Level: " + level, bsize*10, bsize*10);
+  
+  	bsize = window.innerHeight/25;
    canvas.requestAnimationFrame(update);
    }	
 }
+window.addEventListener('resize', function(){ 
+	canvas.width  = window.innerWidth - 20;
+    canvas.height = window.innerHeight - 20;
+    canvas.style = "";
+    width = canvas.scrollWidth;
+	height = canvas.scrollHeight;
+
+}, true);
 addEventListener("keydown", keyd, false);
 addEventListener("keyup", keyu, false);
 
