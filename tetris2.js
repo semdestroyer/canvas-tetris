@@ -42,6 +42,24 @@ var field =
 
 
 
+var IMG_restart;
+var IMG_left;
+var IMG_up;
+var IMG_accelerate;
+var IMG_right;
+var IMG_rotate;
+
+
+
+
+
+var restx = bsize*8;
+var resty = bsize*16;
+var rests = bsize*4;
+
+
+
+
 
 function shape_O(s,rot)
 {
@@ -396,6 +414,25 @@ function Next()
 function start()
 {
 
+	IMG_rotate = new Image();
+	IMG_right = new Image();
+	IMG_accelerate = new Image();
+	IMG_left = new Image();
+	IMG_restart = new Image();
+
+
+	IMG_rotate.src = "img/rotate.svg";
+	IMG_right.src =  "img/right.svg";
+	IMG_accelerate.src = "img/accelerate.svg"; 
+	IMG_left.src = "img/left.svg" ;
+	IMG_restart.src = "img/restart.svg";
+
+		
+
+
+
+
+
    	addEventListener("touchstart", touchButtd, false);
    	addEventListener("touchend", touchButtu, false);
    	delay = speed;
@@ -494,7 +531,20 @@ function touchButtd(evt)
 		{
 			window.navigator.vibrate(100);
 			keyd( new KeyboardEvent('keydown', {'keyCode':40, 'which':40}));
-		} 
+		}
+        if(over == true)
+            {
+                if(tch.pageX >  restx
+			     && tch.pageX < restx + rests 
+                && tch.pageY > resty 
+                && tch.pageY < resty+rests)
+		      {
+			     window.navigator.vibrate(100);
+			     keyd( new KeyboardEvent('keydown', {'keyCode':40, 'which':40}));
+		      }
+            }
+        
+        
 
 		  
 }
@@ -919,9 +969,13 @@ fi = field[y][x];
 
 if(over == true)
 {
-	 ctx.fillText("Score: " + score, 200, 300);
-	  ctx.fillText("Level: " + level, 200, 400);
-	   ctx.fillText("Game Over", 200, 500);
+    
+	 	ctx.fillText("Score: " + score, bsize*8, bsize*10);
+	  	ctx.fillText("Level: " + level, bsize*8, bsize*12);
+	    ctx.fillText("Game Over", bsize*8, bsize*14);
+        ctx.drawImage(IMG_restart, bsize*8 , bsize*16 , bsize*4, bsize*4);
+	    bsize = window.innerHeight/25;
+	    ctx.font=bsize + "px Georgia";
 
 }
 else
@@ -1111,6 +1165,7 @@ var c = 0;
    }
    if(/Android|AppleWebKit|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent))
    {
+   		/*
    		ctx.fillStyle = "rgb(161, 108, 59)";				
 		ctx.fillRect(0,600,50,50);
 		ctx.fillStyle = "rgb(0, 0, 0)";	
@@ -1130,6 +1185,16 @@ var c = 0;
 		ctx.fillRect(350,600,65,50);
 		ctx.fillStyle = "rgb(0, 0, 0)";	
 		ctx.fillText('rotate',350,630);
+		*/
+		
+		ctx.drawImage(IMG_accelerate, bsize,  bsize*19,  bsize, bsize);
+		ctx.drawImage(IMG_left, bsize*2.5 , bsize*19 , bsize, bsize);
+		ctx.drawImage(IMG_right, bsize*3.5 , bsize*19 , bsize, bsize);
+		ctx.drawImage(IMG_rotate, bsize*4.5 , bsize*19 , bsize, bsize);	
+
+
+
+
 
    }
 
@@ -1254,6 +1319,14 @@ var c = 0;
    canvas.requestAnimationFrame(update);
    }	
 }
+window.addEventListener('resize', function(){ 
+	canvas.width  = window.innerWidth - 20;
+    canvas.height = window.innerHeight - 20;
+    canvas.style = "";
+    width = canvas.scrollWidth;
+	height = canvas.scrollHeight;
+
+}, true);
 addEventListener("keydown", keyd, false);
 addEventListener("keyup", keyu, false);
 
